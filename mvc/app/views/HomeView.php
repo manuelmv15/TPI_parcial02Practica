@@ -26,11 +26,7 @@
             <label for="capitalPrestamo">capital del préstamo</label>
             <input type="text" name="capitalPrestamo" id="capitalPrestamo">
         </div>
-        
-        <div>
-            <label for="capitalAbonado">capital abonado</label>
-            <input type="text" name="capitalAbonado" id="numeroCuotas">
-        </div>
+
         <div>
             <label for=" interesMensual">interés mensual</label>
             <input type="text" name="interesMensual" id="interesMensual">

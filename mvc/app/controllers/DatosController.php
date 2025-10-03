@@ -7,14 +7,13 @@ class DatosController
 
     public function index()
     {
+        $nombre = $_POST["nombre"];
         $email = $_POST["email"];
         $dui = $_POST["dui"];
-        $capitalPrestamo = $_POST["capitalPrestamo"];
-        $interesMensual = $_POST["interesMensual"];
-        $numeroCuotas = ["numeroCuotas"];
-        $nombre = $_POST["nombre"];
 
-        $capitalPrestamo = $_POST["capitalPrestamo"];
+        $capitalPrestamo = floatval($_POST["capitalPrestamo"]);
+        $interesMensual = floatval($_POST["interesMensual"]);
+        $numeroCuotas = floatval($_POST["numeroCuotas"]);
 
 
         return $this->view("DatosView", ["title" => "Home", "nombre" => $nombre, "email"=>$email,"dui"=>$dui,"capitalPrestamo"=>$capitalPrestamo, "interesMensual"=>$interesMensual,"numeroCuotas"=>$numeroCuotas,"capitalPrestamo"=>$capitalPrestamo]);
