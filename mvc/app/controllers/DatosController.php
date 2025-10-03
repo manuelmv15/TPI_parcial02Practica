@@ -13,11 +13,45 @@ class DatosController
 
         $capitalPrestamo = floatval($_POST["capitalPrestamo"]);
         $interesMensual = floatval($_POST["interesMensual"]);
-        $numeroCuotas = floatval($_POST["numeroCuotas"]);
+        $numeroCuotas = intval($_POST["numeroCuotas"]);
+        $mensaje = "Dato no valido";
 
+        if (preg_match("/^\d+(\.\d{1,2})?$/", $capitalPrestamo)) {
 
-        return $this->view("DatosView", ["title" => "Home", "nombre" => $nombre, "email"=>$email,"dui"=>$dui,"capitalPrestamo"=>$capitalPrestamo, "interesMensual"=>$interesMensual,"numeroCuotas"=>$numeroCuotas,"capitalPrestamo"=>$capitalPrestamo]);
+            if (preg_match("/^\d+(\.\d{1,2})?$/", $interesMensual)) {
+               
+                if (preg_match("/^[0-9]+$/", $numeroCuotas)) {
+
+                    if (preg_match("/^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$/", $email)) {
+
+                        if (preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/", $nombre)) {
+
+                            if (preg_match('/^\d{8}-\d$/', $dui)) {
+                               
+                                return $this->view("DatosView", ["title" => "Datos", "nombre" => $nombre, "email" => $email, "dui" => $dui, "capitalPrestamo" => $capitalPrestamo, "interesMensual" => $interesMensual, "numeroCuotas" => $numeroCuotas, "capitalPrestamo" => $capitalPrestamo]);
+                            
+                            } else {
+                                return $this->view("HomeView", ["title" => "Home", "msj" => $mensaje]);
+                            }
+                        } else {
+                            return $this->view("HomeView", ["title" => "Home", "msj" => $mensaje]);
+                        }
+                    } else {
+                        return $this->view("HomeView", ["title" => "Home", "msj" => $mensaje]);
+                    }
+                } else {
+                    return $this->view("HomeView", ["title" => "Home", "msj" => $mensaje]);
+                }
+            } else {
+                return $this->view("HomeView", ["title" => "Home", "msj" => $mensaje]);
+            }
+        } else {
+            return $this->view("HomeView", ["title" => "Home", "msj" => $mensaje]);
+        }
     }
+
+
+
 
     public function view($vista, $data = [])
     {
@@ -31,6 +65,4 @@ class DatosController
             echo "Vista no encontrada ../app/views/$vista.php";
         }
     }
-
-    
 }
